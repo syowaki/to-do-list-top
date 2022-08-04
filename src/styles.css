@@ -1,0 +1,61 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: red;
+}
+.logo {
+
+}
+.header-menu {
+    display: flex;
+}
+.header-menu ul{
+    display: flex;
+    gap: 5vw;
+
+}
+.header-menu li{
+    list-style: none;
+}
+.main {
+    display: flex;
+}
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    background-color: blue;
+}
+.main-menu {
+    display: flex;
+    width: 80vw;
+    background-color: yellow;
+    padding: 10px;
+}
+.card {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    width: 20vw;
+    background-color: green;
+}
+.card-buttons {
+    display: flex;
+    gap: 10px;
+}
+.priority-button {
+    padding: 1px 0px 1px 0px;
+    text-align: center;
+    background-color: yellow;
+    border-radius: 10px;
+}
+.due-date-button {
+    padding: 1px 0px 1px 0px;
+    text-align: center;
+    background-color: yellow;
+    border-radius: 10px;
+}
