@@ -28,16 +28,31 @@
             <h3>sidemenu</h3>
             <h3>sidemenu</h3>
         </div>
-        <div class="main-menu">
+        <div class="main-menu" id="card-menu">
             <div class="card">
                 <h4>Card Title</h4>
                 <p>Card Description</p>
                 <div class="card-buttons">
-                    <div class="priority-button"><p>priority</p></div>
-                    <div class="due-date-button"><p>due date</p></div>
+                    <div class="priority-button">priority</div>
+                    <div class="due-date-button">due date</div>
                 </div>
             </div>
         </div>
     </div>
+    <button onclick="addToDo()"><h1>+</h1></button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close" onclick="closeAddToDo()">&times;</span>
+      <input type="text" placeholder="Title">
+      <input type="text" placeholder="Description">
+      <input type="text" placeholder="Priority">
+      <input type="text" placeholder="Due Date">
+    </div>
+  
+  </div>
 </body>
 </html>
