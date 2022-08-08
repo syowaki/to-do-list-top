@@ -35,6 +35,7 @@ header {
 }
 .main-menu {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     width: 80vw;
     background-color: yellow;

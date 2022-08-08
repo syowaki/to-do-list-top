@@ -1,15 +1,18 @@
 //to do card should be a div with all the information from object
 //add to do which should be an input form
+//Factory Function
 const toDoListArray = [];
 const toDoListFactory = (title, description, priority, dueDate) => {
     return {title, description, priority, dueDate}
 };
-const testBook = toDoListFactory("Title", "Description", "Priority", "Due Date")
-toDoListArray.push(testBook);
+const testToDo = toDoListFactory("Title", "Description", "Priority", "Due Date")
+toDoListArray.push(testToDo);
 
+
+//Popup
 // Get the modal
 var modal = document.getElementById("myModal");
-const addToDo = (function() {
+const addToDoPopup = (function() {
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -25,8 +28,23 @@ window.onclick = function(event) {
     }
 };
 
+//Add toDo to array
+const addToDo = (function() {
+    const title = document.getElementById("addTitle").value;
+    const description = document.getElementById("addDescription").value;
+    const priority = document.getElementById("addPriority").value;
+    const dueDate = document.getElementById("addDueDate").value;
+    const newToDo = toDoListFactory(title, description, priority, dueDate);
+    toDoListArray.push(newToDo);
+    closeAddToDo();
+    renderToDo();
+})
 
+
+//Render the array
 const renderToDo = (function() {
+    const cardMenu = document.getElementById("card-menu");
+    cardMenu.innerHTML = "";
     for (let toDo in toDoListArray) {
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("class", "card");
