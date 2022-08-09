@@ -1,12 +1,82 @@
-//to do card should be a div with all the information from object
-//add to do which should be an input form
+//Clean up and create different modules
+//Rename variables
+//Allow for different to do collections to be added
+
+
+//IN PROGRESS
+//Trying to change the listed cards based on the selected project
+//renderProjects - 
+//addProjects
+//renderToDo - Needs to render the correseponsing cards based on the project selected
+
 //Factory Function
+const projects = [];
+const projectsFactory = (title, toDoList) => {
+    return {title, toDoList}
+}
 const toDoListArray = [];
 const toDoListFactory = (title, description, priority, dueDate) => {
     return {title, description, priority, dueDate}
 };
+
+//TEST
 const testToDo = toDoListFactory("Title", "Description", "Priority", "Due Date")
 toDoListArray.push(testToDo);
+const testProject = projectsFactory("Default", toDoListArray);
+projects.push(testProject);
+
+
+//Render Projects
+const renderProjects = (function() {
+    //TEST
+    console.log(projects);
+    const sideMenu = document.getElementById("projects");
+    sideMenu.innerHTML = "";
+    for(project in projects) {
+        const thisProject = document.createElement("li");
+        thisProject.innerHTML = projects[project].title;
+        sideMenu.append(thisProject);
+    }
+    const addProjectDiv = document.createElement("div");
+    addProjectDiv.setAttribute("id", "addProjectForm");
+
+    const inputProject = document.createElement("input");
+    inputProject.setAttribute("type", "text");
+    inputProject.setAttribute("value", "");
+    inputProject.setAttribute("id", "newProjectName");
+
+    const submitInput = document.createElement("input");
+    submitInput.setAttribute("type", "submit");
+    submitInput.setAttribute("value", "+");
+    submitInput.addEventListener("click", addProject);
+
+    addProjectDiv.append(inputProject, submitInput);
+
+    sideMenu.append(addProjectDiv);
+});
+
+//Add Project
+//Maybe need a staging string to hold onto before switching or adding project
+const addProject = (function() {
+    let newProjectName = document.getElementById("newProjectName").value;
+    //IF NO PROJECTS - Save them as the default project
+    if(projects.length === 0) {
+        const addedProject = projectsFactory("Default", toDoListArray);
+        projects.push(addedProject);
+        toDoListArray = [];
+    } else { //If created a project, save the toDoListArray with the title
+        const getTitleOfProject = (function() {
+            const currentAmountOfProjects = projects.length;
+
+        })
+        const addedProject = projectsFactory(Default, []); //Saving an empty array may not work
+        projects.push(addedProject);
+        toDoListArray = [];
+    }
+    renderProjects();
+})
+
+
 
 
 //Popup
@@ -48,6 +118,8 @@ function deleteToDo(event) {
 }
 
 const detailsModal = document.getElementById("detailsWindow");
+
+
 //Expand Project Details
 const projectDetails = (function(event) {
     const details = document.getElementById("toDoDetails");
@@ -75,6 +147,7 @@ const projectDetails = (function(event) {
 
 //Render the array
 const renderToDo = (function() {
+    renderProjects();
     const cardMenu = document.getElementById("card-menu");
     cardMenu.innerHTML = "";
     let position = 0;
