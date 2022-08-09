@@ -29,31 +29,30 @@
             <h3>sidemenu</h3>
         </div>
         <div class="main-menu" id="card-menu">
-            <div class="card">
-                <h4>Card Title</h4>
-                <p>Card Description</p>
-                <div class="card-buttons">
-                    <div class="priority-button">priority</div>
-                    <div class="due-date-button">due date</div>
-                </div>
-            </div>
+
         </div>
+        <div class="plus-div"><button onclick="addToDoPopup()" class="plus-button"><h1>+</h1></button></div>
     </div>
-    <button onclick="addToDoPopup()"><h1>+</h1></button>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="addToDo" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close" onclick="closeAddToDo()">&times;</span>
-      <input type="text" placeholder="Title" id="addTitle">
-      <input type="text" placeholder="Description" id="addDescription">
-      <input type="number" placeholder="Priority" id="addPriority">
-      <input type="date" placeholder="Due Date" id="addDueDate">
-      <button type="submit" onclick="addToDo()">Add</button>
+        <!-- Modal content -->
+        <div class="modal-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <input type="text" placeholder="Title" id="addTitle">
+        <input type="text" placeholder="Description" id="addDescription">
+        <input type="number" placeholder="Priority" id="addPriority">
+        <input type="date" placeholder="Due Date" id="addDueDate">
+        <button type="submit" onclick="addToDo()">Add</button>
+        </div>
     </div>
-  
-  </div>
+    <div id="detailsWindow">
+        <div id="toDoDetails">
+        </div>
+    </div>
+  <footer>
+    <div class="footer"><p>My To Do</p></div>
+  </footer>
 </body>
 </html>
