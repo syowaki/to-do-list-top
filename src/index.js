@@ -1,13 +1,6 @@
-//Clean up and create different modules
-//Rename variables
-//Allow for different to do collections to be added
-
-
 //IN PROGRESS
-//Trying to change the listed cards based on the selected project
-//renderProjects - 
-//addProjects
-//renderToDo - Needs to render the correseponsing cards based on the project selected
+    //clickedProject()
+    //renderToDo()
 
 //Project saving needs to happen when 
     //changing projects,
@@ -34,24 +27,36 @@ const testProject = projectsFactory("VLCEHH", toDoListArray);
 projects.push(testProject);
 
 
+//Handles the clicked project from renderProjects
+const clickedProject = (function(event) {
+
+    //TESTewjfowenfilnkewflnlewnfknweifjnfelwnfeij
+    let clickedProjectIndexPosition = event.currentTarget.indexNumber;
+    renderToDo(projects[clickedProjectIndexPosition].toDoList)
+
+    //Save project being exited out of and not create a new one
+    //THIS NEEEEEEDS WORKDSVNDFVNAKDSZFEK
+});
+
+
+
 //Render Projects
 
 const renderProjects = (function() {
     const sideMenu = document.getElementById("projects");
     sideMenu.innerHTML = "";
+    //projectCount will how be how I handle links
+    let projectCount = 0;
     for(project in projects) {
         const thisProject = document.createElement("li");
         thisProject.innerHTML = projects[project].title;
+        thisProject.indexNumber = projectCount;
+        thisProject.addEventListener("click", clickedProject);
         sideMenu.append(thisProject);
+        projectCount++;
     }
 
-    // //TESTING
-    // if(stagingProject === "Default") {
-    // }else {
-    //     const stagedProject = document.createElement("li");
-    //     stagedProject.innerHTML = stagingProject;
-    //     sideMenu.append(stagedProject);
-    // }
+
     
     const addProjectDiv = document.createElement("div");
     addProjectDiv.setAttribute("id", "addProjectForm");
@@ -71,23 +76,11 @@ const renderProjects = (function() {
     sideMenu.append(addProjectDiv);
 });
 
-//Add Project
-//Maybe need a staging string to hold onto before switching or adding project
-
-
-//YOU ARE WORKING ON THE PROBLELM WITH ADDING PROJECTS!!!!!!!!
-//
-//
-// 
-// 
 
 const addProject = (function() {
     //Save the cards
     const addedProject = projectsFactory(stagingProject, toDoListArray);
     projects.push(addedProject);
-
-    //TEST
-    console.log(projects);
     
     //Stage the new project
     toDoListArray = [];
@@ -166,11 +159,18 @@ const projectDetails = (function(event) {
 
 
 //Render the array
-const renderToDo = (function() {
+const renderToDo = (function(toDos) {
     renderProjects();
     const cardMenu = document.getElementById("card-menu");
     cardMenu.innerHTML = "";
     let position = 0;
+
+    //NEED TO RENDER THE TODOS THAT ARE SAVED IN THE CORRESPONSING PROJECTS
+    //jdnfliajwndfinaidfninwefineifneini
+    if(toDos != null) {
+        console.log(toDos[0]);
+    }
+
     for (let toDo in toDoListArray) {
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("class", "card");
