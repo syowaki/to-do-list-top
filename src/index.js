@@ -9,12 +9,20 @@
 //addProjects
 //renderToDo - Needs to render the correseponsing cards based on the project selected
 
+//Project saving needs to happen when 
+    //changing projects,
+    //creating new projects
+
+
+//Global Variables
+let stagingProject = "Default";
+
 //Factory Function
 const projects = [];
 const projectsFactory = (title, toDoList) => {
     return {title, toDoList}
 }
-const toDoListArray = [];
+let toDoListArray = [];
 const toDoListFactory = (title, description, priority, dueDate) => {
     return {title, description, priority, dueDate}
 };
@@ -22,14 +30,13 @@ const toDoListFactory = (title, description, priority, dueDate) => {
 //TEST
 const testToDo = toDoListFactory("Title", "Description", "Priority", "Due Date")
 toDoListArray.push(testToDo);
-const testProject = projectsFactory("Default", toDoListArray);
+const testProject = projectsFactory("VLCEHH", toDoListArray);
 projects.push(testProject);
 
 
 //Render Projects
+
 const renderProjects = (function() {
-    //TEST
-    console.log(projects);
     const sideMenu = document.getElementById("projects");
     sideMenu.innerHTML = "";
     for(project in projects) {
@@ -37,6 +44,15 @@ const renderProjects = (function() {
         thisProject.innerHTML = projects[project].title;
         sideMenu.append(thisProject);
     }
+
+    // //TESTING
+    // if(stagingProject === "Default") {
+    // }else {
+    //     const stagedProject = document.createElement("li");
+    //     stagedProject.innerHTML = stagingProject;
+    //     sideMenu.append(stagedProject);
+    // }
+    
     const addProjectDiv = document.createElement("div");
     addProjectDiv.setAttribute("id", "addProjectForm");
 
@@ -57,22 +73,27 @@ const renderProjects = (function() {
 
 //Add Project
 //Maybe need a staging string to hold onto before switching or adding project
-const addProject = (function() {
-    let newProjectName = document.getElementById("newProjectName").value;
-    //IF NO PROJECTS - Save them as the default project
-    if(projects.length === 0) {
-        const addedProject = projectsFactory("Default", toDoListArray);
-        projects.push(addedProject);
-        toDoListArray = [];
-    } else { //If created a project, save the toDoListArray with the title
-        const getTitleOfProject = (function() {
-            const currentAmountOfProjects = projects.length;
 
-        })
-        const addedProject = projectsFactory(Default, []); //Saving an empty array may not work
-        projects.push(addedProject);
-        toDoListArray = [];
-    }
+
+//YOU ARE WORKING ON THE PROBLELM WITH ADDING PROJECTS!!!!!!!!
+//
+//
+// 
+// 
+
+const addProject = (function() {
+    //Save the cards
+    const addedProject = projectsFactory(stagingProject, toDoListArray);
+    projects.push(addedProject);
+
+    //TEST
+    console.log(projects);
+    
+    //Stage the new project
+    toDoListArray = [];
+    stagingProject = document.getElementById("newProjectName").value;
+
+    renderToDo();
     renderProjects();
 })
 
@@ -126,7 +147,6 @@ const projectDetails = (function(event) {
     details.innerHTML = "";
 
     const selectedToDo = event.currentTarget.indexNumber;
-    console.log(toDoListArray[selectedToDo]);
     
     const detailedTitle = document.createElement("h1");
     detailedTitle.innerHTML = toDoListArray[selectedToDo].title;
