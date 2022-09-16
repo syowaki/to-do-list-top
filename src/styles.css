@@ -193,6 +193,8 @@ header {
     width: 80px;
   }
   #addProjectForm {
-    padding-top: 10px;
     display: flex;
+  }
+  #addProjectLabel {
+    text-decoration: underline;
   }

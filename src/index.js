@@ -7,9 +7,6 @@
     //creating new projects
 
 
-//Global Variables
-let stagingProject = "Default";
-
 //Factory Function
 const projects = [];
 const projectsFactory = (title, toDoList) => {
@@ -20,22 +17,15 @@ const toDoListFactory = (title, description, priority, dueDate) => {
     return {title, description, priority, dueDate}
 };
 
-//TEST
-const testToDo = toDoListFactory("Title", "Description", "Priority", "Due Date")
-toDoListArray.push(testToDo);
-const testProject = projectsFactory("VLCEHH", toDoListArray);
-projects.push(testProject);
-
 
 //Handles the clicked project from renderProjects
 const clickedProject = (function(event) {
-
-    //TESTewjfowenfilnkewflnlewnfknweifjnfelwnfeij
+    //Sends the array that needs to be loaded to renderToDo
     let clickedProjectIndexPosition = event.currentTarget.indexNumber;
     renderToDo(projects[clickedProjectIndexPosition].toDoList)
 
     //Save project being exited out of and not create a new one
-    //THIS NEEEEEEDS WORKDSVNDFVNAKDSZFEK
+    
 });
 
 
@@ -56,7 +46,9 @@ const renderProjects = (function() {
         projectCount++;
     }
 
-
+    const inputProjectLabel = document.createElement("h5");
+    inputProjectLabel.setAttribute("id", "addProjectLabel")
+    inputProjectLabel.innerHTML = "Save As Project";
     
     const addProjectDiv = document.createElement("div");
     addProjectDiv.setAttribute("id", "addProjectForm");
@@ -73,18 +65,18 @@ const renderProjects = (function() {
 
     addProjectDiv.append(inputProject, submitInput);
 
-    sideMenu.append(addProjectDiv);
+    sideMenu.append(inputProjectLabel, addProjectDiv);
 });
 
 
 const addProject = (function() {
     //Save the cards
-    const addedProject = projectsFactory(stagingProject, toDoListArray);
+    let newProjectName = document.getElementById("newProjectName").value;
+    const addedProject = projectsFactory(newProjectName, toDoListArray);
     projects.push(addedProject);
     
-    //Stage the new project
+    //Clear the array for new project
     toDoListArray = [];
-    stagingProject = document.getElementById("newProjectName").value;
 
     renderToDo();
     renderProjects();
@@ -168,49 +160,90 @@ const renderToDo = (function(toDos) {
     //NEED TO RENDER THE TODOS THAT ARE SAVED IN THE CORRESPONSING PROJECTS
     //jdnfliajwndfinaidfninwefineifneini
     if(toDos != null) {
-        console.log(toDos[0]);
-    }
-
-    for (let toDo in toDoListArray) {
-        const cardDiv = document.createElement("div");
-        cardDiv.setAttribute("class", "card");
-        cardDiv.addEventListener("click", projectDetails)
-        cardDiv.indexNumber = position;
-
-        const cardTitle = document.createElement("h4");
-        cardTitle.innerHTML = toDoListArray[toDo].title;
-
-        const cardDescription = document.createElement("p");
-        cardDescription.innerHTML = toDoListArray[toDo].description;
-
-        const cardButtons = document.createElement("div");
-        cardButtons.setAttribute("class", "card-buttons");
-
-        const priorityButton = document.createElement("div");
-        priorityButton.setAttribute("class", "priority-button");
-        priorityButton.innerHTML = toDoListArray[toDo].priority;
-
-        const dueDateButton = document.createElement("div");
-        dueDateButton.setAttribute("class", "due-date-button");
-        dueDateButton.innerHTML = toDoListArray[toDo].dueDate;
-
-        const divDeleteButton = document.createElement("div")
-        divDeleteButton.setAttribute("class", "delete-button-div");
-        const deleteButton = document.createElement("button");
-        deleteButton.innerHTML  = "Delete";
-        deleteButton.addEventListener("click", deleteToDo);
-
-        //Keep track of index number of cards for delete
-        deleteButton.indexNumber = position;
-        position ++;
-
-        divDeleteButton.append(deleteButton)
-
-        cardButtons.append(priorityButton, dueDateButton, divDeleteButton);
-        
-        cardDiv.append(cardTitle, cardDescription, cardButtons);
-
-        document.getElementById("card-menu").append(cardDiv);
+        let toDoListArray = toDos
+        for (let toDo in toDoListArray) {
+            const cardDiv = document.createElement("div");
+            cardDiv.setAttribute("class", "card");
+            cardDiv.addEventListener("click", projectDetails)
+            cardDiv.indexNumber = position;
+    
+            const cardTitle = document.createElement("h4");
+            cardTitle.innerHTML = toDoListArray[toDo].title;
+    
+            const cardDescription = document.createElement("p");
+            cardDescription.innerHTML = toDoListArray[toDo].description;
+    
+            const cardButtons = document.createElement("div");
+            cardButtons.setAttribute("class", "card-buttons");
+    
+            const priorityButton = document.createElement("div");
+            priorityButton.setAttribute("class", "priority-button");
+            priorityButton.innerHTML = toDoListArray[toDo].priority;
+    
+            const dueDateButton = document.createElement("div");
+            dueDateButton.setAttribute("class", "due-date-button");
+            dueDateButton.innerHTML = toDoListArray[toDo].dueDate;
+    
+            const divDeleteButton = document.createElement("div")
+            divDeleteButton.setAttribute("class", "delete-button-div");
+            const deleteButton = document.createElement("button");
+            deleteButton.innerHTML  = "Delete";
+            deleteButton.addEventListener("click", deleteToDo);
+    
+            //Keep track of index number of cards for delete
+            deleteButton.indexNumber = position;
+            position ++;
+    
+            divDeleteButton.append(deleteButton)
+    
+            cardButtons.append(priorityButton, dueDateButton, divDeleteButton);
+            
+            cardDiv.append(cardTitle, cardDescription, cardButtons);
+    
+            document.getElementById("card-menu").append(cardDiv);
+        }
+    } else {
+        for (let toDo in toDoListArray) {
+            const cardDiv = document.createElement("div");
+            cardDiv.setAttribute("class", "card");
+            cardDiv.addEventListener("click", projectDetails)
+            cardDiv.indexNumber = position;
+    
+            const cardTitle = document.createElement("h4");
+            cardTitle.innerHTML = toDoListArray[toDo].title;
+    
+            const cardDescription = document.createElement("p");
+            cardDescription.innerHTML = toDoListArray[toDo].description;
+    
+            const cardButtons = document.createElement("div");
+            cardButtons.setAttribute("class", "card-buttons");
+    
+            const priorityButton = document.createElement("div");
+            priorityButton.setAttribute("class", "priority-button");
+            priorityButton.innerHTML = toDoListArray[toDo].priority;
+    
+            const dueDateButton = document.createElement("div");
+            dueDateButton.setAttribute("class", "due-date-button");
+            dueDateButton.innerHTML = toDoListArray[toDo].dueDate;
+    
+            const divDeleteButton = document.createElement("div")
+            divDeleteButton.setAttribute("class", "delete-button-div");
+            const deleteButton = document.createElement("button");
+            deleteButton.innerHTML  = "Delete";
+            deleteButton.addEventListener("click", deleteToDo);
+    
+            //Keep track of index number of cards for delete
+            deleteButton.indexNumber = position;
+            position ++;
+    
+            divDeleteButton.append(deleteButton)
+    
+            cardButtons.append(priorityButton, dueDateButton, divDeleteButton);
+            
+            cardDiv.append(cardTitle, cardDescription, cardButtons);
+    
+            document.getElementById("card-menu").append(cardDiv);
+        }
     }
 });
 
